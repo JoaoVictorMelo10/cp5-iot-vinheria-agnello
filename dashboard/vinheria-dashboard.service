@@ -1,0 +1,46 @@
+# ============================================================
+# CP5 — Vinheria Agnello | Serviço Linux (systemd)
+# Arquivo: /etc/systemd/system/vinheria-dashboard.service
+# ============================================================
+#
+# Como instalar este serviço na VM Ubuntu:
+#
+# 1. Copie este arquivo para o systemd:
+#    sudo cp vinheria-dashboard.service /etc/systemd/system/
+#
+# 2. Recarregue o systemd:
+#    sudo systemctl daemon-reload
+#
+# 3. Ative o serviço (inicia junto com a VM):
+#    sudo systemctl enable vinheria-dashboard
+#
+# 4. Inicie agora:
+#    sudo systemctl start vinheria-dashboard
+#
+# 5. Verifique se está rodando:
+#    sudo systemctl status vinheria-dashboard
+#
+# 6. Para ver os logs em tempo real:
+#    sudo journalctl -u vinheria-dashboard -f
+#
+# 7. Para parar:
+#    sudo systemctl stop vinheria-dashboard
+#
+# ============================================================
+
+[Unit]
+Description=Vinheria Agnello — Dashboard IoT CP5 FIAP
+After=network.target
+
+[Service]
+Type=simple
+User=ubuntu
+WorkingDirectory=/home/ubuntu/dashboard
+ExecStart=/usr/bin/python3 /home/ubuntu/dashboard/dashboard.py
+Restart=on-failure
+RestartSec=5
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target

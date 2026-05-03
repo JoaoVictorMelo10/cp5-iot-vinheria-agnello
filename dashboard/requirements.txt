@@ -1,0 +1,12 @@
+# ============================================================
+# CP5 — Vinheria Agnello | Dashboard IoT
+# requirements.txt
+# ============================================================
+# Instale com:
+#   pip install -r requirements.txt
+# ============================================================
+
+dash==2.17.1          # Framework principal do dashboard web
+plotly==5.22.0        # Biblioteca de gráficos interativos (usado pelo Dash)
+requests==2.31.0      # Requisições HTTP para o STH-Comet e Orion Context Broker
+Flask==3.0.3          # Servidor web (dependência do Dash, não precisa importar)
