@@ -37,44 +37,7 @@ O ESP32 agora atua apenas como ponto de coleta e atuação: publica os dados via
 
 ## Arquitetura
 
-```
-┌─────────────────────┐        MQTT          ┌──────────────────┐
-│  ESP32 + DHT22 +    │ ───────────────────▶│   Mosquitto      │
-│  LDR + LED + Buzzer │   publica sensores   │   (broker MQTT)  │
-└─────────────────────┘                      └────────┬─────────┘
-         ▲                                            │
-         │ comandos                                   ▼
-         │ on/off                              ┌──────────────────┐
-         │                                     │  IoT Agent MQTT  │
-         │                                     │   (porta 4041)   │
-         │                                     └────────┬─────────┘
-         │                                              │
-         │                                              ▼
-         │                                     ┌──────────────────┐
-         │                                     │ Orion Context    │
-         │                                     │ Broker (1026)    │
-         │                                     └────────┬─────────┘
-         │                                              │
-         │                                              ▼
-         │                                     ┌──────────────────┐
-         │                                     │   STH-Comet      │
-         │                                     │   (porta 8666)   │
-         │                                     └────────┬─────────┘
-         │                                              │
-         │                                              ▼
-         │                                     ┌──────────────────┐
-         │     publica via MQTT direto        │     MongoDB      │
-         └─────────────────────────────────────│  (histórico)     │
-                                               └──────────────────┘
-                                                        ▲
-                                                        │ HTTP GET
-                                                        │
-                                              ┌─────────┴─────────┐
-                                              │ Dashboard Python  │
-                                              │  (porta 5000)     │
-                                              │  serviço Linux    │
-                                              └───────────────────┘
-```
+![Arquitetura Vinheria](images/arquitetura_cp5_vinheria.svg)
 
 Toda a infraestrutura FIWARE roda em **containers Docker** numa VM Ubuntu 24 hospedada no **Microsoft Azure** (`20.124.178.183`).
 
